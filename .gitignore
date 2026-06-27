@@ -1,0 +1,18 @@
+# Build output
+out/
+build/
+*.class
+montoya-api.jar
+
+# Gradle
+.gradle/
+!gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

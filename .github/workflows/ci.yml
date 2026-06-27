@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Download Montoya API
+        run: |
+          curl -L -o montoya-api.jar \
+            https://repo1.maven.org/maven2/net/portswigger/burp/extensions/montoya-api/2026.4/montoya-api-2026.4.jar
+
+      - name: Compile extension
+        run: |
+          mkdir -p out
+          javac --release 17 -cp montoya-api.jar -d out src/autoscan/AutoScanExtension.java
+
+      - name: Package jar
+        run: |
+          mkdir -p dist
+          jar --create --file dist/autoscan.jar -C out .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoscan-jar
+          path: dist/autoscan.jar
