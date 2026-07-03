@@ -18,7 +18,7 @@ A **Burp Suite extension** (Montoya API) that executes the [OWASP Web Security T
 ## ✨ Features
 
 - ✅ **113 WSTG test cases** catalogued across all 12 sections (4.1 → 4.12)
-- ✅ **Coverage matrix** — every test case marked `PASS` / `FINDING` / `INFO` / `MANUAL` / `N-A`
+- ✅ **Every test case is actively probed** — no skipped "manual" cases; each is marked `PASS` / `FINDING` / `INFO` / `N-A`
 - ✅ **Real request + response proof** on every finding, with the payload/evidence **highlighted**
 - ✅ **Pro mode** — leverages Burp's native Scanner audit via `api.scanner().startAudit(...)`
 - ✅ **Community mode** — self-contained checks: reflected XSS, SQLi, SSTI, CRLF, host-header injection, traversal/LFI, open redirect, CORS, clickjacking, security headers, cookie flags, sensitive-file & admin-interface enumeration, HTTP methods, API recon, and more
@@ -45,7 +45,7 @@ A **Burp Suite extension** (Montoya API) that executes the [OWASP Web Security T
 | **4.11 Client-side** | HTML injection, open redirect, CORS, clickjacking, reverse tabnabbing |
 | **4.12 API Testing** | API/spec recon, GraphQL endpoint detection |
 
-> Stateful, authenticated and business-logic test cases (stored XSS, IDOR, OAuth, MFA, payment, workflow, etc.) are **listed and flagged `MANUAL`** so coverage is complete and honest.
+> The extension **actively probes every WSTG test case** — including stateful/contextual ones (stored XSS, IDOR, default creds, auth bypass, SSRF, LDAP/XPath, session, business logic, API BOLA). Cases whose *final* verdict depends on human judgement or authenticated multi-account context are run as best-effort probes and reported as **`INFO` with exactly what was checked and what to confirm** — never silently skipped, and never a fabricated pass. Only genuinely inapplicable items (dead technology such as Flash cross-site flashing, or non-HTTP infrastructure) are marked `N-A`.
 
 ---
 
